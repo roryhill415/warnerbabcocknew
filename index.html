@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warner Babcock Institute for Green Chemistry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cyan: #00AEEF;
+    --teal: #006B7A;
+    --teal-dark: #004D59;
+    --slate: #8090A0;
+    --slate-light: #B8C8D0;
+    --offwhite: #F7F9FA;
+    --white: #FFFFFF;
+    --text: #1A2830;
+    --text-mid: #3D5560;
+    --text-light: #6A8590;
+    --border: #DDE8EC;
+    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { font-family:"IBM Plex Sans",sans-serif; color:var(--text); background:var(--white); font-size:16px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+  .page { display:none; }
+  .page.active { display:block; }
+  nav { position:absolute; top:0; left:0; right:0; z-index:100; background:transparent; border-bottom:none; }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .nav-logo { display:flex; align-items:center; cursor:pointer; flex-shrink:0; }
+  .nav-logo img { height:38px; width:auto; }
+  .nav-links { display:flex; align-items:center; gap:0.25rem; list-style:none; }
+  .nav-links > li { position:relative; }
+  .nav-links > li > a, .nav-links > li > span { display:block; padding:0.5rem 1rem; color:rgba(255,255,255,0.85); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:6px; cursor:pointer; transition:color var(--transition),background var(--transition); white-space:nowrap; }
+  .nav-links > li > a:hover, .nav-links > li > span:hover, .nav-links > li > a.active, .nav-links > li > span.active { color:var(--cyan); background:rgba(255,255,255,0.1); }
+  nav.nav-dark .nav-links > li > a, nav.nav-dark .nav-links > li > span { color:var(--text-mid); }
+  nav.nav-dark .nav-links > li > a:hover, nav.nav-dark .nav-links > li > span:hover { color:var(--teal); background:rgba(0,107,122,0.06); }
+  nav.nav-dark .nav-cta { color:var(--white) !important; }
+  .dropdown-menu { display:none; position:absolute; top:100%; left:0; background:var(--white); border:1px solid var(--border); border-radius:10px; box-shadow:0 8px 32px rgba(0,75,90,0.12); min-width:200px; padding:0.5rem; z-index:200; }
+  .dropdown::after { content:''; position:absolute; left:0; right:0; height:8px; top:100%; }
+  .dropdown:hover .dropdown-menu { display:block; }
+  .dropdown-menu a { display:block; padding:0.5rem 1rem; color:var(--text-mid); text-decoration:none; font-size:0.875rem; border-radius:6px; cursor:pointer; transition:color var(--transition),background var(--transition); }
+  .dropdown-menu a:hover { color:var(--teal); background:rgba(0,107,122,0.06); }
+  .nav-cta { background:var(--teal) !important; color:var(--white) !important; border-radius:6px !important; padding:0.5rem 1.25rem !important; }
+  .nav-cta:hover { background:var(--teal-dark) !important; }
+  .hx-hero-bottom { display:flex; justify-content:space-between; align-items:flex-end; width:100%; }
+  .hx-hero-cubes { width:220px; opacity:0.55; mix-blend-mode:screen; pointer-events:none; margin-bottom:-1rem; }
+  .page-hero { position:relative; overflow:hidden; }
+  .page-hero::after { content:""; position:absolute; right:-10px; top:50%; transform:translateY(-50%); width:200px; height:200px; background:url('/mnt/user-data/uploads/1773770450147_squares_design_elements_transparent.png') center/contain no-repeat; opacity:0.25; mix-blend-mode:screen; pointer-events:none; }
+  .page-hero { background:linear-gradient(135deg,rgba(0,77,89,0.88) 0%,rgba(0,107,122,0.82) 100%), url('https://images.unsplash.com/photo-1656331797721-b593b8f00297?q=80&w=1800&fit=crop') center center / cover no-repeat; padding:4rem 2rem 3.5rem; }
+  .page-hero-inner { max-width:1200px; margin:0 auto; }
+  .breadcrumb { font-size:0.8rem; color:rgba(255,255,255,0.55); margin-bottom:0.75rem; cursor:pointer; }
+  .page-hero h1 { font-family:"Playfair Display",serif; font-size:clamp(2rem,4vw,3rem); color:var(--white); line-height:1.2; }
+  .page-hero p { margin-top:1rem; color:rgba(255,255,255,0.75); font-size:1.05rem; max-width:640px; line-height:1.7; }
+  .content-section { padding:4rem 2rem; }
+  .content-inner { max-width:860px; margin:0 auto; }
+  .content-inner.wide { max-width:1200px; }
+  .content-inner h2 { font-family:"Playfair Display",serif; font-size:1.8rem; color:var(--text); margin:2.5rem 0 1rem; line-height:1.25; }
+  .content-inner h2:first-child { margin-top:0; }
+  .content-inner h3 { font-size:1.1rem; font-weight:600; color:var(--teal); margin:2rem 0 0.75rem; }
+  .content-inner p { color:var(--text-mid); line-height:1.8; margin-bottom:1rem; }
+  .content-inner ul { margin:1rem 0 1.5rem 1.25rem; color:var(--text-mid); line-height:1.8; }
+  .content-inner ul li { margin-bottom:0.4rem; }
+  .tabs { display:flex; gap:0.5rem; border-bottom:2px solid var(--border); margin-bottom:3rem; overflow-x:auto; }
+  .tab { padding:0.75rem 1.25rem; font-size:0.9rem; font-weight:500; color:var(--text-light); cursor:pointer; white-space:nowrap; border-bottom:2px solid transparent; margin-bottom:-2px; transition:color var(--transition),border-color var(--transition); }
+  .tab.active, .tab:hover { color:var(--teal); border-bottom-color:var(--teal); }
+  .tab-content { display:none; }
+  .tab-content.active { display:block; }
+  .principles-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:1.25rem; margin-top:2rem; }
+  .principle-card { background:var(--offwhite); border:1px solid var(--border); border-radius:10px; padding:1.5rem; }
+  .principle-num { font-family:"Playfair Display",serif; font-size:2rem; color:var(--cyan); line-height:1; margin-bottom:0.5rem; }
+  .principle-card h4 { font-size:0.95rem; font-weight:600; color:var(--text); margin-bottom:0.5rem; }
+  .principle-card p { font-size:0.85rem; color:var(--text-light); line-height:1.6; margin:0; }
+  .sector-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; }
+  .sector-card { background:var(--white); border:1px solid var(--border); border-radius:12px; padding:2rem; border-left:4px solid var(--cyan); }
+  .sector-card h3 { font-size:1.05rem; font-weight:600; color:var(--text); margin-bottom:0.75rem; }
+  .sector-card p { font-size:0.9rem; color:var(--text-light); line-height:1.7; }
+  .tech-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:1.5rem; margin-top:2rem; }
+  .tech-card { background:var(--offwhite); border-radius:12px; padding:2rem; border-top:3px solid var(--teal); }
+  .tech-card h3 { font-size:1rem; font-weight:600; color:var(--text); margin-bottom:0.75rem; }
+  .tech-card p { font-size:0.875rem; color:var(--text-light); line-height:1.7; }
+  .invention-item { border-bottom:1px solid var(--border); padding:2rem 0; }
+  .invention-item:last-child { border-bottom:none; }
+  .invention-item h3 { font-family:"Playfair Display",serif; font-size:1.3rem; color:var(--text); margin-bottom:0.75rem; }
+  .invention-item p { color:var(--text-mid); line-height:1.8; font-size:0.95rem; }
+  .patent-tag { display:inline-block; background:rgba(0,107,122,0.08); color:var(--teal); font-size:0.75rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:100px; margin-top:0.75rem; margin-right:0.4rem; }
+  .patent-list { list-style:none; margin:0.75rem 0 2rem; padding:0; }
+  .patent-list li { padding:0.75rem 0; border-bottom:1px solid var(--border); font-size:0.875rem; color:var(--text-mid); line-height:1.6; }
+  .patent-list li:last-child { border-bottom:none; }
+  .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start; }
+  .contact-block h3 { font-family:"Playfair Display",serif; font-size:1.5rem; color:var(--text); margin-bottom:1.5rem; }
+  .contact-item { display:flex; align-items:flex-start; gap:1rem; margin-bottom:1.25rem; }
+  .contact-icon { width:40px; height:40px; background:rgba(0,174,239,0.1); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1.1rem; flex-shrink:0; }
+  .contact-item-text { padding-top:0.3rem; }
+  .contact-item-text strong { display:block; font-size:0.8rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--slate); margin-bottom:0.2rem; }
+  .contact-item-text span { font-size:0.95rem; color:var(--text-mid); }
+  .contact-item-text a { color:var(--teal); text-decoration:none; }
+  .contact-item-text a:hover { color:var(--cyan); }
+  footer { background:linear-gradient(135deg,rgba(0,77,89,0.92) 0%,rgba(0,107,122,0.88) 100%), url('https://images.unsplash.com/photo-1656331797721-b593b8f00297?q=80&w=1800&fit=crop') center center / cover no-repeat; padding:3rem 2rem; color:rgba(255,255,255,0.7); }
+  .footer-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; }
+  .footer-brand img { height:32px; filter:brightness(0) invert(1); margin-bottom:1rem; opacity:0.85; }
+  .footer-brand p { font-size:0.85rem; line-height:1.7; max-width:260px; }
+  .footer-col h4 { font-size:0.75rem; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.9); margin-bottom:1rem; }
+  .footer-col a { display:block; font-size:0.875rem; color:rgba(255,255,255,0.6); text-decoration:none; cursor:pointer; margin-bottom:0.5rem; transition:color var(--transition); }
+  .footer-col a:hover { color:var(--cyan); }
+  .footer-bottom { max-width:1200px; margin:2rem auto 0; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,0.1); display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:rgba(255,255,255,0.4); }
+  .footer-bottom a { color:rgba(255,255,255,0.4); text-decoration:none; }
+  .footer-bottom a:hover { color:rgba(255,255,255,0.7); }
+  @media (max-width:700px) { .nav-links { display:none; } .footer-inner { grid-template-columns:1fr; } .contact-grid { grid-template-columns:1fr; } }
+  /* ══ HOME vX — EDITORIAL MAGAZINE ══ */
+
+  /* HERO */
+  .hx-hero { position:relative; height:100vh; min-height:600px; overflow:hidden; display:flex; flex-direction:column; padding-top:72px; }
+  .hx-hero-photo { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 30%; }
+  .hx-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,30,40,0.45) 0%, rgba(0,30,40,0.65) 50%, rgba(0,30,40,0.8) 100%); }
+  .hx-hero-content { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; width:100%; }
+  .hx-hero-top { position:absolute; top:2rem; left:2rem; right:2rem; display:flex; justify-content:space-between; align-items:flex-start; }
+  .hx-hero-tagline { font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
+  .hx-hero-main { display:flex; flex-direction:column; align-items:center; max-width:860px; width:100%; }
+  .hx-hero-h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,5.5vw,4.8rem); color:var(--white); line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.75rem; }
+  .hx-hero-side { display:flex; flex-direction:column; align-items:center; }
+  .hx-hero-mission-label { font-size:0.68rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--cyan); border-top:2px solid var(--cyan); padding-top:0.4rem; margin-bottom:0.75rem; display:inline-block; }
+  .hx-hero-desc { font-size:1.05rem; color:rgba(255,255,255,0.72); line-height:1.8; margin-bottom:2rem; max-width:560px; }
+  .hx-hero-actions { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; }
+  .hx-hero-bottom { position:absolute; bottom:2rem; left:0; right:0; display:flex; justify-content:center; }
+  .hx-hero-scroll { font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:rgba(255,255,255,0.35); }
+
+  /* SHARED */
+  .hx-btn { display:inline-block; background:var(--cyan); color:#002530; padding:0.75rem 1.75rem; border-radius:2px; font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:background 0.2s,transform 0.15s; }
+  .hx-btn:hover { background:#00c8f0; transform:translateY(-1px); }
+  .hx-btn-ghost { background:transparent; color:rgba(255,255,255,0.85); border:1.5px solid rgba(255,255,255,0.4); }
+  .hx-btn-ghost:hover { background:rgba(255,255,255,0.08); transform:none; color:white; }
+  .hx-section-label { font-size:0.68rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--cyan); margin-bottom:1rem; display:block; }
+  .hx-label-light { color:rgba(255,255,255,0.5); }
+  .hx-section-h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem); color:var(--text); line-height:1.15; }
+  .hx-text-link { display:inline-block; margin-top:1.25rem; font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--teal); cursor:pointer; transition:color 0.2s; }
+  .hx-text-link:hover { color:var(--cyan); }
+
+  /* MISSION */
+  .hx-mission { padding:0; background:var(--white); border-bottom:1px solid var(--border); }
+  .hx-mission-inner { max-width:100%; display:grid; grid-template-columns:1fr min(42%, 680px); min-height:520px; }
+  .hx-mission-text-col { padding:5rem 4rem 5rem max(4rem, calc(50vw - 520px)); display:flex; flex-direction:column; justify-content:center; background:var(--offwhite); }
+  .hx-mission-img-col { position:relative; overflow:hidden; min-height:520px; }
+  .hx-mission-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.55) brightness(0.9); }
+  .hx-mission-img-caption { position:absolute; bottom:1rem; right:1rem; font-size:0.65rem; color:rgba(255,255,255,0.55); letter-spacing:0.07em; text-transform:uppercase; background:rgba(0,0,0,0.3); padding:0.2rem 0.5rem; border-radius:2px; }
+  .hx-mission-label { font-size:0.68rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--teal); margin-bottom:1.25rem; border-left:3px solid var(--cyan); padding-left:0.75rem; display:block; }
+  .hx-mission-quote { font-family:'Playfair Display',serif; font-size:clamp(1.2rem,1.8vw,1.55rem); color:var(--text); line-height:1.4; margin-bottom:1.5rem; }
+  .hx-mission-body { font-size:0.92rem; color:var(--text-mid); line-height:1.85; margin-bottom:0.9rem; }
+
+  /* GREEN CHEMISTRY */
+  .hx-gc { padding:0; background:var(--white); }
+  .hx-gc-inner { max-width:100%; display:grid; grid-template-columns:min(42%, 680px) 1fr; min-height:520px; }
+  .hx-gc-img-col { position:relative; overflow:hidden; min-height:520px; background:#555555; } .hx-gc-img-col::after { content:""; position:absolute; inset:0; background:rgba(60,80,70,0.25); pointer-events:none; z-index:1; }
+  .hx-gc-img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; filter:saturate(0.7) brightness(1.05) contrast(0.88); mix-blend-mode:lighten; }
+  .hx-gc-img-caption { position:absolute; bottom:1rem; left:1rem; font-size:0.65rem; color:rgba(255,255,255,0.55); letter-spacing:0.07em; text-transform:uppercase; background:rgba(0,0,0,0.3); padding:0.2rem 0.5rem; border-radius:2px; }
+  .hx-gc-text-col { padding:5rem max(4rem, calc(50vw - 520px)) 5rem 4rem; display:flex; flex-direction:column; justify-content:center; background:var(--offwhite); }
+  .hx-gc-text-col p { font-size:0.95rem; color:var(--text-mid); line-height:1.85; margin-bottom:1rem; }
+  .hx-criteria-title { font-size:0.75rem; font-weight:600; color:var(--text-light); letter-spacing:0.04em; padding:0.9rem 0; border-bottom:1px solid var(--border); }
+  .hx-gc-criteria { margin:1.75rem 0 1.5rem; display:flex; flex-direction:column; gap:0; border-top:1px solid var(--border); }
+  .hx-criterion { display:flex; align-items:baseline; gap:1rem; padding:0.9rem 0; border-bottom:1px solid var(--border); font-size:0.9rem; color:var(--text-mid); line-height:1.5; }
+  .hx-criterion-num { font-family:'Playfair Display',serif; font-size:0.8rem; color:var(--cyan); flex-shrink:0; width:20px; }
+
+  /* AREAS */
+  .hx-areas { padding:5rem 0; background:var(--white); }
+  .hx-areas-header { max-width:1200px; margin:0 auto; padding:0 2rem 3rem; text-align:center; }
+  .hx-areas-h2 { margin-top:0.25rem; margin-bottom:0; }
+  .hx-areas-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .hx-area-card { cursor:pointer; display:flex; flex-direction:column; border-right:1px solid var(--border); transition:background 0.2s; background:var(--white); }
+  .hx-area-card:last-child { border-right:none; }
+  .hx-area-card-dark { background:var(--teal-dark); }
+  .hx-area-card:hover { background:var(--offwhite); }
+  .hx-area-card-dark:hover { background:#003a44; }
+  .hx-area-img-wrap { width:100%; overflow:hidden; flex-shrink:0; }
+  .hx-area-img { width:100%; aspect-ratio:3/2; object-fit:cover; object-position:center center; display:block; filter:brightness(0.88) saturate(0.75); }
+  .hx-area-card:hover .hx-area-img { filter:brightness(0.92) saturate(0.85); }
+  .hx-area-body { padding:2rem 2rem 2.5rem; flex:1; display:flex; flex-direction:column; }
+  .hx-area-num { font-family:'Playfair Display',serif; font-size:1rem; color:var(--cyan); margin-bottom:0.75rem; opacity:0.7; }
+  .hx-area-title { font-family:'Playfair Display',serif; font-size:1.4rem; line-height:1.2; margin-bottom:0.9rem; color:var(--text); }
+  .hx-area-card-dark .hx-area-title { color:var(--white); }
+  .hx-area-desc { font-size:0.875rem; color:var(--text-mid); line-height:1.75; flex:1; }
+  .hx-area-card-dark .hx-area-desc { color:rgba(255,255,255,0.6); }
+  .hx-area-link { margin-top:1.5rem; font-size:0.72rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--cyan); transition:letter-spacing 0.2s; }
+  .hx-area-card:hover .hx-area-link { letter-spacing:0.14em; }
+
+  /* FOUNDERS */
+  .hx-founders { position:relative; padding:6rem 2rem; overflow:hidden; background:var(--teal-dark); }
+  .hx-founders-bg { display:none; }
+  .hx-founders-bg-img { width:100%; height:100%; object-fit:cover; filter:brightness(0.15) saturate(0.3); }
+  .hx-founders-bg-overlay { display:none; }
+  .hx-founders-inner { position:relative; z-index:1; max-width:1200px; margin:0 auto; }
+  .hx-founders-header { margin-bottom:3.5rem; text-align:center; }
+  .hx-founders-h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem); color:var(--white); line-height:1.2; margin-top:0.5rem; }
+  .hx-founders-grid { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; gap:3rem; align-items:start; }
+  .hx-founder-divider { width:1px; background:rgba(255,255,255,0.1); align-self:stretch; }
+  .hx-founder { display:grid; grid-template-columns:110px 1fr; gap:1.75rem; cursor:pointer; max-width:420px; }
+  .hx-founder-img-wrap { width:110px; height:140px; overflow:hidden; border-radius:2px; background:var(--teal-dark); }
+  .hx-founder-img { width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(30%) brightness(0.9); transition:filter 0.3s; }
+  .hx-founder:hover .hx-founder-img { filter:grayscale(0%) brightness(1); }
+  .hx-founder-name { font-family:'Playfair Display',serif; font-size:1.35rem; color:var(--white); margin-bottom:0.2rem; }
+  .hx-founder-role { font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--cyan); margin-bottom:0.85rem; }
+  .hx-founder-bio { font-size:0.85rem; color:rgba(255,255,255,0.6); line-height:1.75; }
+  .hx-founder-link { display:inline-block; margin-top:0.85rem; font-size:0.72rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.35); cursor:pointer; transition:color 0.2s; }
+  .hx-founder:hover .hx-founder-link { color:var(--cyan); }
+
+  /* CONTACT STRIP */
+  .hx-contact-strip { padding:4rem 2rem; background:var(--offwhite); border-top:1px solid var(--border); }
+  .hx-contact-strip-inner { max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; gap:2rem; }
+  .hx-contact-h2 { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--text); line-height:1.2; margin:0.25rem 0 0.75rem; }
+  .hx-contact-text p { font-size:0.9rem; color:var(--text-mid); line-height:1.7; }
+  .hx-contact-text a { color:var(--teal); text-decoration:none; }
+  .hx-contact-text a:hover { color:var(--cyan); }
+
+  @media (max-width:1000px) {
+    .hx-hero-h1 { font-size:clamp(2rem,8vw,3.5rem); }
+    .hx-mission-inner { grid-template-columns:1fr; }
+    .hx-mission-img-col { min-height:300px; order:-1; }
+    .hx-gc-inner { grid-template-columns:1fr; }
+    .hx-gc-img-col { min-height:300px; }
+    .hx-areas-grid { grid-template-columns:1fr; }
+    .hx-area-card { border-right:none; border-bottom:1px solid var(--border); }
+    .hx-founders-grid { grid-template-columns:1fr; }
+    .hx-founder-divider { display:none; }
+    .hx-contact-strip-inner { flex-direction:column; align-items:flex-start; }
+    .hx-areas-header { grid-template-columns:1fr; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <img src="/mnt/user-data/uploads/wb_logo_final_transparent.png" alt="Warner Babcock Institute for Green Chemistry">
+    </div>
+    <ul class="nav-links">
+      <li class="dropdown">
+        <span id="nav-green">Green Chemistry &#9662;</span>
+        <div class="dropdown-menu">
+          <a onclick="showPage('green','about')">About Green Chemistry</a>
+          <a onclick="showPage('green','history')">History</a>
+          <a onclick="showPage('green','principles')">The 12 Principles</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <span id="nav-work">Our Work &#9662;</span>
+        <div class="dropdown-menu">
+          <a onclick="showPage('work','sectors')">Industry Sectors</a>
+          <a onclick="showPage('work','technologies')">Core Technologies</a>
+          <a onclick="showPage('work','inventions')">Inventions</a>
+          <a onclick="showPage('work','patents')">Patents</a>
+        </div>
+      </li>
+      <li class="dropdown">
+        <span id="nav-about">About Us &#9662;</span>
+        <div class="dropdown-menu">
+          <a onclick="showPage('about','founders')">Founders</a>
+          <a onclick="showPage('about','leadership')">Leadership</a>
+        </div>
+      </li>
+      <li><a class="nav-cta" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+
+  <!-- HERO: full-viewport photo, logo + title overlaid -->
+  <section class="hx-hero">
+    <img src="https://images.unsplash.com/photo-1656331797721-b593b8f00297?q=80&w=1800&fit=crop" alt="Water droplets on surface" class="hx-hero-photo">
+    <div class="hx-hero-overlay"></div>
+    <div class="hx-hero-content">
+      <div class="hx-hero-top">
+        <div class="hx-hero-tagline">Est. 2007 &nbsp;·&nbsp; Lowell, Massachusetts</div>
+      </div>
+      <div class="hx-hero-main">
+        <h1 class="hx-hero-h1">Warner Babcock Institute<br>for Green Chemistry</h1>
+        <div class="hx-hero-side">
+          <div class="hx-hero-mission-label">Mission</div>
+          <p class="hx-hero-desc">To design, develop and commercialize high-performance, cost-effective and sustainable technology solutions across all industries that are touched by chemistry.</p>
+          <div class="hx-hero-actions">
+            <span class="hx-btn" onclick="showPage('green','about')">Our Science</span>
+            <span class="hx-btn hx-btn-ghost" onclick="showPage('work','inventions')">Inventions</span>
+          </div>
+        </div>
+      </div>
+      <div class="hx-hero-bottom">
+        <div class="hx-hero-scroll">Scroll to explore ↓</div>
+        <img src="/mnt/user-data/uploads/1773770450147_squares_design_elements_transparent.png" class="hx-hero-cubes" alt="">
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT IS GREEN CHEMISTRY: editorial two-col, unequal -->
+  <section class="hx-gc">
+    <div class="hx-gc-inner">
+      <div class="hx-gc-img-col">
+        <img src="https://images.unsplash.com/photo-1601653487130-b062f940e64a?q=80&w=987&fit=crop" alt="Green chemistry" class="hx-gc-img">
+      </div>
+      <div class="hx-gc-text-col">
+        <div class="hx-section-label">Green Chemistry</div>
+        <h2 class="hx-section-h2">A science that eliminates hazard at the source</h2>
+        <p>Green chemistry is a revolutionary approach to materials design that builds safety and sustainability into the design process from the very beginning — eliminating hazardous substances before they exist, rather than managing them after the fact.</p>
+        <p>When hazardous materials are removed from products and processes, all hazard-related costs disappear with them — handling, transportation, disposal, compliance, and liability. It is both more environmentally sound and more economically viable than the alternatives.</p>
+        <div class="hx-gc-criteria">
+          <div class="hx-criteria-title">For a technology to qualify as Green Chemistry it must be:</div>
+          <div class="hx-criterion"><span class="hx-criterion-num">01</span><span>More environmentally benign than existing alternatives</span></div>
+          <div class="hx-criterion"><span class="hx-criterion-num">02</span><span>More economically viable than existing alternatives</span></div>
+          <div class="hx-criterion"><span class="hx-criterion-num">03</span><span>Functionally equivalent to or outperforms existing alternatives</span></div>
+        </div>
+        <span class="hx-text-link" onclick="showPage('green','about')">About Green Chemistry →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDING STORY: image right, text left -->
+  <section class="hx-mission">
+    <div class="hx-mission-inner">
+      <div class="hx-mission-text-col">
+        <div class="hx-mission-label">Founded 2007</div>
+        <h2 class="hx-mission-quote">The world's first company dedicated entirely to green chemistry innovation</h2>
+        <p class="hx-mission-body">In 2007, chemist John Warner and entrepreneur Jim Babcock founded the Warner Babcock Institute with a singular purpose: to take green chemistry out of academia and into industry. Warner had spent years co-developing the field's foundational principles — including the 12 Principles of Green Chemistry — and had built the world's first PhD program in the discipline. Babcock brought the institutional and financial experience to turn that science into a commercial reality.</p>
+        <p class="hx-mission-body">Together they created a new kind of organization — not a university, not a traditional R&D firm, but an innovation factory where green chemistry was not a constraint or a compliance exercise, but the core methodology. WBI became the model for how sustainable chemistry could be practiced at the highest level of scientific rigor, across every industry touched by chemistry.</p>
+        <span class="hx-text-link" onclick="showPage('about','founders')">Meet the founders →</span>
+      </div>
+      <div class="hx-mission-img-col">
+        <img src="https://images.unsplash.com/photo-1554475901-4538ddfbccc2?q=80&w=2072&fit=crop" alt="Scientific research" class="hx-mission-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE AREAS: horizontal scroll cards, editorial style -->
+  <section class="hx-areas">
+    <div class="hx-areas-header">
+      <div class="hx-section-label">Our Work</div>
+      <h2 class="hx-section-h2 hx-areas-h2">Three pillars of WBI's scientific program</h2>
+    </div>
+    <div class="hx-areas-grid">
+
+      <div class="hx-area-card" onclick="showPage('work','technologies')">
+        <div class="hx-area-img-wrap">
+          <img src="https://images.unsplash.com/photo-1707135719544-fd75c0e66151?w=700&fit=crop&q=60" alt="Core technologies" class="hx-area-img">
+        </div>
+        <div class="hx-area-body">
+          <div class="hx-area-num">I</div>
+          <h3 class="hx-area-title">Core Technologies</h3>
+          <p class="hx-area-desc">Five proprietary technology platforms — from non-covalent derivatization and metal oxide nanotechnology to non-animal toxicology testing — form the scientific backbone of WBI's innovation work.</p>
+          <div class="hx-area-link">Explore platforms →</div>
+        </div>
+      </div>
+
+      <div class="hx-area-card hx-area-card-dark" onclick="showPage('work','sectors')">
+        <div class="hx-area-img-wrap">
+          <img src="https://images.unsplash.com/photo-1614308459036-779d0dfe51ff?q=80&w=987&fit=crop" alt="Industry sectors" class="hx-area-img">
+        </div>
+        <div class="hx-area-body">
+          <div class="hx-area-num">II</div>
+          <h3 class="hx-area-title">Industry Sectors</h3>
+          <p class="hx-area-desc">WBI's expertise spans six major sectors wherever chemistry intersects with environmental and economic performance — from energy and pharmaceuticals to personal care and retail supply chains.</p>
+          <div class="hx-area-link">View sectors →</div>
+        </div>
+      </div>
+
+      <div class="hx-area-card" onclick="showPage('work','inventions')">
+        <div class="hx-area-img-wrap">
+          <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&fit=crop" alt="Inventions and environment" class="hx-area-img">
+        </div>
+        <div class="hx-area-body">
+          <div class="hx-area-num">III</div>
+          <h3 class="hx-area-title">Inventions</h3>
+          <p class="hx-area-desc">A portfolio of proprietary inventions spanning water harvesting, anti-cancer compounds, Alzheimer's therapeutics, solar energy, and lithium battery recycling — each backed by patents.</p>
+          <div class="hx-area-link">View portfolio →</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOUNDERS: dark full-bleed, large text -->
+  <section class="hx-founders">
+    <div class="hx-founders-bg">
+      <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=2072&fit=crop" alt="" class="hx-founders-bg-img" aria-hidden="true">
+      <div class="hx-founders-bg-overlay"></div>
+    </div>
+    <div class="hx-founders-inner">
+      <div class="hx-founders-header">
+        <div class="hx-section-label hx-label-light">Leadership Team</div>
+        <h2 class="hx-founders-h2">World-class scientific<br>and commercial leadership</h2>
+      </div>
+      <div class="hx-founders-grid">
+        <div class="hx-founder" onclick="showPage('about','founders')">
+          <div class="hx-founder-img-wrap">
+            <img src="https://warnerbabcock.vercel.app/wp-content/uploads/2018/06/Warner_John_010-214x300.jpg" alt="John Warner" class="hx-founder-img">
+          </div>
+          <div class="hx-founder-info">
+            <div class="hx-founder-name">John Warner</div>
+            <div class="hx-founder-role">Co-Founder</div>
+            <p class="hx-founder-bio">Co-inventor of the 12 Principles of Green Chemistry. 2014 Perkin Medal recipient. Named one of "25 Visionaries Changing the World" by Utne Reader.</p>
+            <span class="hx-founder-link">Full profile →</span>
+          </div>
+        </div>
+        <div class="hx-founder-divider"></div>
+        <div class="hx-founder" onclick="showPage('about','founders')">
+          <div class="hx-founder-img-wrap">
+            <img src="https://warnerbabcock.vercel.app/wp-content/uploads/2021/04/Jim_Babcock_frm_Cthulhu_site-234x300.jpg" alt="Jim Babcock" class="hx-founder-img">
+          </div>
+          <div class="hx-founder-info">
+            <div class="hx-founder-name">Jim Babcock</div>
+            <div class="hx-founder-role">Co-Founder &amp; Board Chairman</div>
+            <p class="hx-founder-bio">Co-founder of global investment bank Babcock &amp; Brown. Harvard Law magna cum laude. Chairman of Cthulhu Ventures, strategic backer of WBI since its founding.</p>
+            <span class="hx-founder-link">Full profile →</span>
+          </div>
+        </div>
+        <div class="hx-founder-divider"></div>
+        <div class="hx-founder" onclick="showPage('about','leadership')">
+          <div class="hx-founder-img-wrap">
+            <img src="https://warnerbabcock.vercel.app/wp-content/uploads/2024/11/Joe-Pont-New-230x300.jpg" alt="Joe Pont" class="hx-founder-img">
+          </div>
+          <div class="hx-founder-info">
+            <div class="hx-founder-name">Joe Pont</div>
+            <div class="hx-founder-role">Chief Executive Officer</div>
+            <p class="hx-founder-bio">Former Head of R&amp;D and VP of Marketing at Lonza. BS Chemistry from Yale, PhD Organic Chemistry from Princeton. Appointed CEO of WBI in 2011.</p>
+            <span class="hx-founder-link">Full profile →</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT STRIP: minimal -->
+  <section class="hx-contact-strip">
+    <div class="hx-contact-strip-inner">
+      <div class="hx-contact-text">
+        <div class="hx-section-label">Contact</div>
+        <h2 class="hx-contact-h2">Warner Babcock Institute<br>for Green Chemistry</h2>
+        <p>116 John Street, Suite 130 · Lowell, MA 01852</p>
+        <p><a href="/cdn-cgi/l/email-protection#4e272028210e392f3c202b3c2c2f2c2d212d25602d2123"><span class="__cf_email__" data-cfemail="f29b9c949db28593809c9780909390919d9199dc919d9f">[email&#160;protected]</span></a> &nbsp;·&nbsp; <a href="tel:+19782295400">+1 (978) 229-5400</a></p>
+      </div>
+      <span class="hx-btn" onclick="showPage('contact')">Get in Touch</span>
+    </div>
+  </section>
+
+</div><!-- /home -->
+<div id="page-green" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-inner" style="position:relative;">
+      <div class="breadcrumb" onclick="showPage('home')">← Home</div>
+      <h1>Green Chemistry</h1>
+      <p>A scientific discipline dedicated to eliminating hazardous substances at the source — better for the environment, and better for business.</p>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="content-inner wide">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('green', 'about')">About</div>
+        <div class="tab" onclick="showTab('green', 'history')">History</div>
+        <div class="tab" onclick="showTab('green', 'principles')">The 12 Principles</div>
+      </div>
+
+      <!-- ABOUT -->
+      <div id="tab-green-about" class="tab-content active">
+        <div style="max-width:860px;">
+          <h2>What Is Green Chemistry?</h2>
+          <p>Green Chemistry is a revolutionary approach to the way that products are made — a science that aims to reduce or eliminate the use and generation of hazardous substances during the design phase of materials development. It requires an inventive and interdisciplinary view of material and product design.</p>
+          <p>Green Chemistry follows the principle that it is better to consider waste prevention options during the design and development phase than to dispose of or treat waste after a process or material has been developed.</p>
+
+          <h3>For a technology to qualify as Green Chemistry, it must accomplish three things:</h3>
+          <ul>
+            <li>It must be more environmentally benign than existing alternatives.</li>
+            <li>It must be more economically viable than existing alternatives.</li>
+            <li>It must be functionally equivalent to or outperform existing alternatives.</li>
+          </ul>
+
+          <h2>The Opportunity</h2>
+          <p>Green Chemistry presents industries with incredible opportunity for growth and competitive advantage. We estimate that only 10% of current technologies are environmentally benign; another 25% could be made benign relatively easily. The remaining 65% have yet to be invented.</p>
+          <p>Green Chemistry also creates cost savings: when hazardous materials are removed from materials and processes, all hazard-related costs are also removed — handling, transportation, disposal, compliance, and liability.</p>
+          <p>Through Green Chemistry, environmentally benign alternatives to current materials and technologies can be systematically introduced across all types of manufacturing, promoting a more environmentally and economically sustainable future.</p>
+        </div>
+      </div>
+
+      <!-- HISTORY -->
+      <div id="tab-green-history" class="tab-content">
+        <div style="max-width:860px;">
+          <h2>A Historical Perspective</h2>
+
+          <h3>Pollution Prevention & Early Advocates</h3>
+          <p>In 1990, Congress passed the Pollution Prevention Act, establishing that pollution should be prevented or reduced at the source. In 1991, the EPA adopted this principle as a declared objective. These events provided the groundwork for what would become Green Chemistry.</p>
+          <p>Several early advocates were instrumental in shaping the movement. Kenneth Hancock, Director of the Division of Chemistry at the NSF, championed the role of chemists in both mitigating environmental effects of past inventions and preventing future problems. Joe Breen, co-founder and first Director of the Green Chemistry Institute in 1997, was a pioneer who toured the world promoting Green Chemistry before his death in 1999 — remembered as the "Heart and Soul of Green Chemistry."</p>
+
+          <h3>The Founding of Green Chemistry</h3>
+          <p>Green Chemistry gained its standing as a scientific discipline through collaboration between government, industry, and academia. In the early 1990s, Paul Anastas — then Chief of the Industrial Chemistry Branch at the EPA — advanced the concept. Working with John Warner, Anastas developed the 12 Principles of Green Chemistry by the mid-1990s.</p>
+          <p>In 1996, Warner, Anastas, and others were stakeholders in the founding of the Presidential Green Chemistry Challenge Award. In 1998, they published the seminal book <em>Green Chemistry: Theory and Practice</em>, which gave precise definition to the field and enumerated the Twelve Principles. The book has been reprinted in several languages.</p>
+          <p>In 2007, John Warner returned to industry to develop green technologies, partnering with Jim Babcock to found the Warner Babcock Institute for Green Chemistry — the first company completely dedicated to developing green chemistry technologies.</p>
+
+          <h3>Green Chemistry Today</h3>
+          <p>Countries worldwide have engaged with Green Chemistry as a sustainable development strategy. The year 2000 marked the founding of the Green Chemistry Institute of Spain, the Green and Sustainable Chemistry Network in Japan, and the Centre of Green Chemistry at Monash University in Australia. California became the first state to pass comprehensive Green Chemistry legislation in 2008.</p>
+          <p>Academic institutions — from the University of Massachusetts and Carnegie Mellon to UC Berkeley and the University of York — have established dedicated Green Chemistry departments, and the field continues to grow in importance on both national and international stages.</p>
+        </div>
+      </div>
+
+      <!-- 12 PRINCIPLES -->
+      <div id="tab-green-principles" class="tab-content">
+        <div style="max-width:860px; margin-bottom:2rem;">
+          <h2>The 12 Principles of Green Chemistry</h2>
+          <p>Developed by John Warner and Paul Anastas in the 1990s, these twelve principles provide a framework for chemists and engineers to design materials, processes, and products that reduce or eliminate the use and generation of hazardous substances.</p>
+        </div>
+        <div class="principles-grid">
+          <div class="principle-card">
+            <div class="principle-num">01</div>
+            <h4>Prevention</h4>
+            <p>Prevent waste rather than treat or clean it up after it has been created.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">02</div>
+            <h4>Atom Economy</h4>
+            <p>Design syntheses so that the final product contains the maximum proportion of starting materials.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">03</div>
+            <h4>Less Hazardous Synthesis</h4>
+            <p>Design syntheses to use and generate substances with little or no toxicity to people or the environment.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">04</div>
+            <h4>Safer Chemicals</h4>
+            <p>Design chemical products to be fully effective yet have little or no toxicity.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">05</div>
+            <h4>Safer Solvents</h4>
+            <p>Avoid using solvents, separation agents, or other auxiliary chemicals — or use innocuous ones when necessary.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">06</div>
+            <h4>Energy Efficiency</h4>
+            <p>Run chemical reactions at ambient temperature and pressure whenever possible.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">07</div>
+            <h4>Renewable Feedstocks</h4>
+            <p>Use starting materials and feedstocks that are renewable rather than depleting.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">08</div>
+            <h4>Reduce Derivatives</h4>
+            <p>Minimize or avoid unnecessary derivatization, which requires additional reagents and generates waste.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">09</div>
+            <h4>Catalysis</h4>
+            <p>Use catalytic reagents — as selective as possible — in preference to stoichiometric reagents.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">10</div>
+            <h4>Design for Degradation</h4>
+            <p>Design chemical products to break down into innocuous substances after use so they don't persist in the environment.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">11</div>
+            <h4>Real-Time Monitoring</h4>
+            <p>Monitor and control processes in real time to prevent the formation of hazardous substances.</p>
+          </div>
+          <div class="principle-card">
+            <div class="principle-num">12</div>
+            <h4>Safer Chemistry</h4>
+            <p>Choose substances and their physical forms to minimize the potential for chemical accidents including releases, explosions, and fires.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div><!-- /green -->
+<div id="page-work" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-inner" style="position:relative;">
+      <div class="breadcrumb" onclick="showPage('home')">← Home</div>
+      <h1>Our Work</h1>
+      <p>WBI's research spans six major industry sectors, underpinned by proprietary core technologies and a growing portfolio of inventions.</p>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="content-inner wide">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('work', 'sectors')">Industry Sectors</div>
+        <div class="tab" onclick="showTab('work', 'technologies')">Core Technologies</div>
+        <div class="tab" onclick="showTab('work', 'inventions')">Inventions</div>
+        <div class="tab" onclick="showTab('work', 'patents')">Patents</div>
+      </div>
+
+      <!-- SECTORS -->
+      <div id="tab-work-sectors" class="tab-content active">
+        <div style="max-width:860px; margin-bottom:2.5rem;">
+          <h2>Industry Sectors</h2>
+          <p>All materials are ultimately based on molecules. WBI's green chemistry expertise applies across a wide range of industries where chemistry intersects with environmental and economic performance.</p>
+        </div>
+        <div class="sector-grid">
+          <div class="sector-card">
+            <h3>Energy, Natural Resources & Environment</h3>
+            <p>Our work in this sector encompasses solar energy, renewable materials, and clean water. We explore novel photon-to-chemical energy mechanisms for generation and storage, develop alternative fuels from renewable feedstocks, and pursue sustainable approaches to water purification and reclamation.</p>
+          </div>
+          <div class="sector-card">
+            <h3>Industrial Chemicals & Materials</h3>
+            <p>In response to legislation, rising feedstock prices, and sustainability drivers, industries need alternatives to conventional chemicals and materials. We develop both "drop in" renewable replacements and fundamentally new materials for agrochemicals, textiles, packaging, printing, construction, and related industries.</p>
+          </div>
+          <div class="sector-card">
+            <h3>Industrial Products</h3>
+            <p>We develop new materials and application mechanisms that avoid VOCs and remove hazardous substances from industrial products including building and construction materials. We have deep expertise in coating, printing, and imaging technologies, as well as photoresist materials and surface cleaning technologies for electronics and semiconductors.</p>
+          </div>
+          <div class="sector-card">
+            <h3>Pharmaceuticals & Biotechnology</h3>
+            <p>Green Chemistry within pharmaceutical sciences can create both resource and cost savings. We develop new, more efficient synthetic methods for active pharmaceutical ingredients as well as novel delivery technologies to improve bioavailability and efficacy.</p>
+          </div>
+          <div class="sector-card">
+            <h3>Personal Care & Cosmetics</h3>
+            <p>We develop fundamentally new materials and application mechanisms that avoid VOCs and potentially harmful substances for hair, skin, and nail products. We also create strategies for resource and cost savings in both the development and manufacturing of cosmetics and personal care products.</p>
+          </div>
+          <div class="sector-card">
+            <h3>Retail, Consumer & Supply Chain</h3>
+            <p>We assess the sustainability of materials and processes that create everyday products — tracing component materials through the supply chain from raw origin through production, distribution, and disposal, and evaluating the impact of current and future regulation on marketplace products.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECHNOLOGIES -->
+      <div id="tab-work-technologies" class="tab-content">
+        <div style="max-width:860px; margin-bottom:2rem;">
+          <h2>Core Technologies</h2>
+          <p>All materials are ultimately based on molecules. WBI believes it is essential to focus on molecular structure and intermolecular interactions to design sustainable technologies, processes, and products. Our proprietary technology platforms enable this at every scale.</p>
+        </div>
+        <div class="tech-grid">
+          <div class="tech-card">
+            <h3>Non-Covalent Derivatization & Formulation Science</h3>
+            <p>We design, synthesize, and characterize small and medium scale multi-molecular solid-state systems. Our expertise in structure-activity relationships of binary and ternary co-crystalline systems allows us to efficiently manipulate bulk physical properties of materials while avoiding high energies and hazardous reagents.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Metal Oxides Nanotechnology</h3>
+            <p>We create technologies that allow for low energy processing of sol-gels and other dispersive states of metal oxides. These semiconductor and photo-active systems can be coated or incorporated into multi-component systems under ambient conditions while maximizing functional product properties.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Films, Coatings & Surfaces</h3>
+            <p>We have developed fundamental film-forming and surface coating mechanisms that minimize energy utilization and VOCs. Our strong capabilities in microscopy and surface analysis enable us to characterize and develop a wide variety of sustainable coating solutions.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Organic/Polymer Synthesis & Engineering</h3>
+            <p>We have deep expertise in the design, synthesis, and characterization of complex molecules using state-of-the-art tools. Our specialized expertise in functional polymeric materials — creating co-polymeric systems with built-in intermolecular interactions — allows us to control stability and reactivity while providing unique properties.</p>
+          </div>
+          <div class="tech-card">
+            <h3>Non-Animal Toxicology Testing</h3>
+            <p>We develop toxicology screening technologies and chemical sensors that avoid hazardous materials and animal testing. Our in-house capabilities for evaluating new and existing chemicals for human and ecological toxicity include bacteriological testing, cell-based assays, human tissue models, and computational modeling.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- INVENTIONS -->
+      <div id="tab-work-inventions" class="tab-content">
+        <div style="max-width:860px; margin-bottom:1rem;">
+          <h2>Inventions</h2>
+          <p>WBI has developed a portfolio of proprietary inventions across a range of chemistry domains — from materials science to therapeutics to environmental technology.</p>
+        </div>
+        <div style="max-width:860px;">
+          <div class="invention-item">
+            <h3>Water Harvesting</h3>
+            <p>WBI has developed materials that extract water from the vapor phase and release it for collection. We have designed proprietary polymers that respond to different wavelengths of light — becoming more hydrophilic in the presence of light, and less hydrophilic in its absence — enabling applications in desalination and air-water harvesting operating under daily solar cycles to rapid millisecond pulses.</p>
+          </div>
+          <div class="invention-item">
+            <h3>Triggered Extraction</h3>
+            <p>WBI has designed several classes of molecules that trigger their surfactancy on or off, enabling water-insoluble components to be mobilized in aqueous systems. Applications include solventless natural products extraction, solventless surface coatings, aqueous encapsulation and delivery technologies, and laundry.</p>
+          </div>
+          <div class="invention-item">
+            <h3>Photo-Osmotic Materials</h3>
+            <p>WBI has invented a family of molecules whose molecular and aggregate solubilities can be controlled by irradiation of UV and visible light, enabling positive and negative osmotic pressures across semipermeable membranes. Primary applications are water purification and energy generation and storage. Part of this work was funded by the US Department of Energy.</p>
+          </div>
+          <div class="invention-item">
+            <h3>Low Temperature Processed Metal Oxides</h3>
+            <p>Traditional processing of photocatalytic TiO₂ semiconductor materials requires sintering at temperatures above 450°C. WBI has developed a technology that creates similar films and structures at room temperature, enabling the use of a wider variety of inexpensive and bio-based substrates alongside significant energy cost savings.</p>
+          </div>
+          <div class="invention-item">
+            <h3>Rilyazines — Anti-Cancer Agents</h3>
+            <p>WBI has developed a proprietary family of small molecules showing promise as selective cytostatic anti-cancer agents. NIH NCI cancer screening demonstrated that one compound (RL-4.0) inhibited growth in 55 of 60 cancer cell lines at single-point dosage, with notable activity against colon cancer, melanoma, and prostate cancer.</p>
+            <span class="patent-tag">US 20150065510</span>
+            <span class="patent-tag">PCT WO 2015034785</span>
+          </div>
+          <div class="invention-item">
+            <h3>Azaphenylenes — Alzheimer's Therapy</h3>
+            <p>WBI has developed a proprietary family of small molecules showing promise as an Alzheimer's Disease therapy. Nearly 100 derivatives have been synthesized and evaluated, with molecular structure optimized to provide effective EC50 dosages at nanomolar concentrations. Preliminary cognition studies in mice showed improved performance and correlated protein disaggregation of Aβ 1-42 and Aβ 1-40.</p>
+            <span class="patent-tag">US 20140094487</span>
+            <span class="patent-tag">PCT WO 2014052906</span>
+          </div>
+          <div class="invention-item">
+            <h3>Chillmaws — Protein Disaggregation</h3>
+            <p>WBI has developed a proprietary family of small molecules for disaggregation of misfolded proteins — the aggregation of which is mechanistically associated with Alzheimer's, Parkinson's, type 2 diabetes, cystic fibrosis, and cataracts. Early results show effective dosages at nanomolar concentrations.</p>
+          </div>
+          <div class="invention-item">
+            <h3>Lithium Cobalt Recovery from Batteries</h3>
+            <p>WBI has created an aqueous flotation system to recover lithium cobalt from e-waste batteries, reproduced at laboratory scale with high efficiency and reproducibility.</p>
+            <span class="patent-tag">US 20140306162</span>
+            <span class="patent-tag">PCT WO 2012177620</span>
+            <span class="patent-tag">EP 2724413</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PATENTS -->
+      <div id="tab-work-patents" class="tab-content">
+        <div style="max-width:860px; margin-bottom:2rem;">
+          <h2>Patents</h2>
+          <p>A sampling of patents filed and issued through the Warner Babcock Institute and its founders, spanning materials science, photochemistry, solar energy, hair chemistry, battery recycling, pharmaceutical compounds, and more.</p>
+        </div>
+        <div style="max-width:860px;">
+
+          <h3 style="margin-top:0; padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">2024</h3>
+          <ul class="patent-list">
+            <li>"Polymer Composites," Livesey, Christopher W.; Hsu, Alexander; Ackley, Brandon; Ellman, Samuel; Kearney, Frederick R.; Warner, John C.; Pont, Joseph L.; Babcock, James V. <span class="patent-tag">US 2024/0101791 A1</span> March 28, 2024.</li>
+            <li>"Improved Polymer Composites," Livesey, Christopher W.; Hsu, Alexander; Ackley, Brandon; Ellman, Samuel; Kearney, Frederick R.; Warner, John C.; Pont, Joseph L.; Babcock, James V. <span class="patent-tag">WO 2024/059282 A1</span> March 21, 2024.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">2013–2014</h3>
+          <ul class="patent-list">
+            <li>"Method for the Preparation of N-Acetyl Cysteine Amide," Warner, John C.; Cheruku, Srinivasa; Thota, Sambaiah; Lee, John W. <span class="patent-tag">US 61/972,133</span> March 28, 2014.</li>
+            <li>"Dihydro-6-Azaphenalene Derivatives for the Treatment of CNS, Oncological Diseases and Related Disorders," Warner, John C. et al. <span class="patent-tag">PCT/US13/62429</span> September 27, 2013.</li>
+            <li>"Formulation and Processes for Hair Coloring," Warner, John C.; Muollo, Laura; Stewart, Amie. US Pat. Application, filed October 14, 2013.</li>
+            <li>"Flexible Microreactors," Warner, John C. et al. US Pat. Application, filed June 18, 2013.</li>
+            <li>"Thermal Imaging," Warner, John C. et al. US Pat. Application, filed June 18, 2013.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">2011–2012</h3>
+          <ul class="patent-list">
+            <li>"Method for the Recovery of Lithium Cobalt Oxide from Lithium Ion Batteries," Poe, Sarah L.; Paradise, Christopher L.; Muollo, Laura R.; Pal, Reshma; Warner, John C.; Korensi, Michael B. <span class="patent-tag">WO/2012/177620A3</span> June 19, 2012.</li>
+            <li>"Dye-sensitized solar cell and corrosion resistant electrode stack therein," Plavisch, Lauren; Ricci, Melissa; Warner, John C. <span class="patent-tag">US2013/0263921</span> April 10, 2012.</li>
+            <li>"Solar cells with a colorant sensitized semiconductor layer prepared from a presensitized semiconductor composition," Warner, John C.; Viola, Michael S.; Barykina, Olga; Dua, Vineet. <span class="patent-tag">US2013/180587</span> January 17, 2012.</li>
+            <li>"Coloring Composition Containing L-DOPA and L-Arginine," Warner, John C.; Stoler, Emily J. <span class="patent-tag">WO/2012/067868A3</span> November 7, 2011.</li>
+            <li>"Dye formulation for fabricating dye sensitized electronic devices," Warner, John C.; Viola, Michael S. <span class="patent-tag">US2013/0074935</span> September 23, 2011.</li>
+            <li>"Formulation and method for hair dyeing," Warner, John C.; Viola, Michael S. <span class="patent-tag">US 8,366,791</span> September 2, 2011.</li>
+            <li>"Protective barriers for electronic devices," Warner, John C.; Viola, Michael S. <span class="patent-tag">US 20130056723 A1</span> September 2, 2011.</li>
+            <li>"Sustainable process for reclaiming precious metals and base metals from electronic waste," Korzenski, Michael B. et al. <span class="patent-tag">WO 2012024603 A2</span> August 19, 2011.</li>
+            <li>"Additives for Solar Cell Semiconductors," Warner, John C. <span class="patent-tag">WO/2011/1034506A1</span> February 18, 2011.</li>
+            <li>"Semiconductor Compositions for Dye-Sensitized Solar Cells," Warner, John C.; Vanbenschoten, Helen; Cannon, Amy. <span class="patent-tag">WO/2011/103503A1</span> February 18, 2011.</li>
+            <li>"Systems and Methods for Preparing Components of Photovoltaic Cells," Warner, John C.; Van Benschoten, Helen; Cannon, Amy. <span class="patent-tag">WO/2011/103494A1</span> / <span class="patent-tag">US2011/0232742</span> February 2011.</li>
+            <li>"Semiconductor Compositions for Dye Sensitized Solar Cells," Warner, John C.; Van Benschoten, Helen; Cannon, Amy. <span class="patent-tag">US2011/0232717</span> February 17, 2011.</li>
+            <li>"Additives for Solar Cell Semiconductors," Warner, John C. <span class="patent-tag">US2011/0226306</span> February 17, 2011.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">2010</h3>
+          <ul class="patent-list">
+            <li>"Hair Coloring Composition Containing an Aromatic Compound and an Initiator," Warner, John C.; Stoler, Emily J. <span class="patent-tag">WO/2011/060354A3</span> November 15, 2010.</li>
+            <li>"Coloring Composition Containing an Aromatic Compound and Tyrosinase," Warner, John C.; Stoler, Emily J. <span class="patent-tag">WO/2011/060351A3</span> November 15, 2010.</li>
+            <li>"Coloring Composition Containing an Aromatic Compound and an Initiator," Warner, John C.; Stoler, Emily J. <span class="patent-tag">US 8,323,169</span> November 15, 2010.</li>
+            <li>"Coloring Composition Containing L-DOPA and L-arginine," Warner, John C.; Stoler, Emily J. <span class="patent-tag">US 8,118,880</span> November 15, 2010.</li>
+            <li>"Non-fluoride containing composition for removal of polymers and other organic material from surface," Korzenski, Michael B. et al. <span class="patent-tag">WO 2010091045 A2</span> February 3, 2010.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">2003–2007</h3>
+          <ul class="patent-list">
+            <li>"Photo-induced Copolymer Functionalized Substrates," Warner, John C.; Cannon, Amy S.; Dye, Kevin. <span class="patent-tag">WO 2007/139810</span> May 23, 2007.</li>
+            <li>"Inducing and controlling the stability of amphiphilic copolymer micelles having pendant thymine," Saito, Kei; Warner, John C. PCT Appl. Serial No. 60/839,852, December 22, 2006.</li>
+            <li>"Biodegradable Polymers," Warner, John C.; Morelli, Alessandra; Ching Ku, Man. <span class="patent-tag">US2005/0266546</span> June 2005.</li>
+            <li>"Photoreactive Polymers and Devices for use in Hair Treatments," Cannon, Amy S.; Raudys, Jennifer; Undurti, Arundhati; Warner, John C. <span class="patent-tag">WO/2004/058187A2</span> / <span class="patent-tag">US 7,550,136</span> December 2003.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">2002</h3>
+          <ul class="patent-list">
+            <li>"Solubilizing Cross-linked Polymers with Photolyase," Warner, John C.; Morelli, Alessandra; Ku, Man Ching. <span class="patent-tag">US 6,946,284</span> November 15, 2002.</li>
+            <li>"Metal Oxide Films," Warner, John C.; Morelli, Alessandra. <span class="patent-tag">US2003/0054207</span> / <span class="patent-tag">WO/2003/0088079A2</span> July 17, 2002.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">1994–1997</h3>
+          <ul class="patent-list">
+            <li>"Thermographic Recording Film," Dombrowski, Edward J. et al.; Warner, John C. <span class="patent-tag">US 5,750,464</span> April 22, 1997.</li>
+            <li>"Thermographic Recording Films," Dombrowski, Edward J. et al.; Warner, John C. <span class="patent-tag">US 5,750,463</span> April 22, 1997.</li>
+            <li>"Photographic System," Guarrera, Donna J. et al.; Warner, John C. <span class="patent-tag">WO/1997/029405A1</span> January 21, 1997.</li>
+            <li>"Photograph System," Guarrera, Donna J. et al.; Warner, John C. <span class="patent-tag">US 5,705,312</span> November 25, 1996.</li>
+            <li>"Copolymers Having Pendant Functional Thymine Groups," Grasshoff, J. Michael; Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">US 5,708,106</span> May 3, 1996.</li>
+            <li>"Low-Volatility, Substituted 2-phenyl-4,6-bis(halomethyl)-1,3,5-triazine for Lithographic Printing Plates," Fitzgerald, Maurice J. et al.; Warner, John C. <span class="patent-tag">WO/1996/034315A1</span> April 19, 1996.</li>
+            <li>"Method of Imaging Using a Polymeric Photoresist Having Pendant Vinylbenzyl Thymine Groups," Grasshoff, J. Michael; Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">US 5,616,451</span> May 24, 1995.</li>
+            <li>"Vinylbenzyl Thymine Monomers and Polymers," Grasshoff, Michael J.; Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">WO/1995/031755A1</span> May 10, 1995.</li>
+            <li>"Process for Fixing an Image, and Medium for Use Therein," Ehret, Anne et al.; Warner, John C. <span class="patent-tag">US 5,582,956</span> April 28, 1995.</li>
+            <li>"Low-Volatility, Substituted 2-Phenyl-4,6-bis[Halomethyl]-1,3,5-triazine for Lithographic Printing Plates," Fitzgerald, Maurice J. et al.; Warner, John C. <span class="patent-tag">US 5,561,029</span> April 28, 1995.</li>
+            <li>"Process for Fixing an Image," Ehret, Anne et al.; Warner, John C. <span class="patent-tag">WO/1995/029067A1</span> April 25, 1995.</li>
+            <li>"Thermally-Processable Image Recording Materials Including Substituted Purine Compounds," Ford, Maureen F. et al.; Warner, John C. <span class="patent-tag">US 5,411,929</span> June 30, 1994.</li>
+            <li>"Vinylbenzyl Thymine Monomers and Their Use in Photoresists," Grasshoff, J. Michael; Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">US 5,455,349</span> May 13, 1994.</li>
+            <li>"Imaging Medium and Process," Fehervari, Agota F. et al.; Warner, John C. <span class="patent-tag">US 5,424,268</span> May 13, 1994.</li>
+            <li>"Copolymeric Mordants and Photographic Products and Processes Containing Same," Grasshoff, J. Michael; Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">US 5,395,731</span> May 13, 1994.</li>
+            <li>"Process for Fixing an Image, and Medium for Use Therein," Marshall, John L. et al.; Warner, John C. <span class="patent-tag">US 5,741,630</span> April 25, 1994.</li>
+          </ul>
+
+          <h3 style="padding-bottom:0.5rem; border-bottom:2px solid var(--border); color:var(--teal-dark);">1991–1992</h3>
+          <ul class="patent-list">
+            <li>"Process and Composition for Use in Photographic Materials Containing Hydroquinones," Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">US 5,338,644</span> December 23, 1992.</li>
+            <li>"Photographic Product and Its Formation and Photographic Method," Taylor, Lloyd D.; Warner, John C. Japanese Pat. App. 06230540, July 16, 1992.</li>
+            <li>"Complexed hydroquinones," Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">Eur. 0523470B1</span> July 7, 1992.</li>
+            <li>"Process and Composition for Use in Photographic Materials Containing Hydroquinones," Taylor, Lloyd D.; Warner, John C. <span class="patent-tag">US 5,177,262</span> July 19, 1991.</li>
+          </ul>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div><!-- /work -->
+<div id="page-about" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-inner" style="position:relative;">
+      <div class="breadcrumb" onclick="showPage('home')">← Home</div>
+      <h1>About Us</h1>
+      <p>Founded in 2007, the Warner Babcock Institute brings together scientific leadership and entrepreneurial vision to advance green chemistry.</p>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="content-inner wide">
+      <div class="tabs">
+        <div class="tab active" onclick="showTab('about', 'founders')">Founders</div>
+        <div class="tab" onclick="showTab('about', 'leadership')">Leadership</div>
+      </div>
+
+      <!-- FOUNDERS -->
+      <div id="tab-about-founders" class="tab-content active">
+        <div style="max-width:860px; margin-bottom:2.5rem;">
+          <p style="font-size:1.05rem; color:var(--text-mid);">WBI was founded in 2007 with a clear mission: to design, develop, and commercialize high-performance, cost-effective, and sustainable technology solutions across all industries touched by chemistry.</p>
+        </div>
+
+        <!-- Jim Babcock -->
+        <div style="display:grid; grid-template-columns:200px 1fr; gap:3rem; margin-bottom:4rem; align-items:start;">
+          <div>
+            <img src="https://warnerbabcock.vercel.app/wp-content/uploads/2021/04/Jim_Babcock_frm_Cthulhu_site-234x300.jpg"
+                 alt="Jim Babcock"
+                 style="width:100%; border-radius:12px; border:1px solid var(--border);"
+                 onerror="this.style.display='none'">
+          </div>
+          <div>
+            <div class="section-label">Co-Founder & Board Chairman</div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:2rem; margin:0.25rem 0 1.25rem;">Jim Babcock</h2>
+            <p>Jim Babcock founded what is now Cthulhu Ventures in 2007, and during the same year collaborated with John Warner to found the Warner Babcock Institute for Green Chemistry. Prior to this, he was a co-founder (in 1977), CEO, and ultimately Chairman of Babcock & Brown Limited, a global investment-banking and funds-management firm listed on the Australian Stock Exchange (ASX) in 2004.</p>
+            <p>Before founding Babcock & Brown, Jim practiced corporate and tax law, having graduated magna cum laude from Harvard College and Harvard Law School, where he was a member and officer of the Harvard Law Review. He served as a law clerk to Judge James R. Browning on the Ninth Circuit Court of Appeals.</p>
+            <p>Jim serves on the boards of several Cthulhu Ventures companies, including the Warner Babcock Institute for Green Chemistry, Collaborative Medicinal Development, Collaborative Aggregates, and Advantage for Analysts.</p>
+          </div>
+        </div>
+
+        <!-- John Warner -->
+        <div style="display:grid; grid-template-columns:200px 1fr; gap:3rem; align-items:start;">
+          <div>
+            <img src="https://warnerbabcock.vercel.app/wp-content/uploads/2018/06/Warner_John_010-214x300.jpg"
+                 alt="John Warner"
+                 style="width:100%; border-radius:12px; border:1px solid var(--border);"
+                 onerror="this.style.display='none'">
+          </div>
+          <div>
+            <div class="section-label">Co-Founder</div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:2rem; margin:0.25rem 0 1.25rem;">John Warner</h2>
+            <p>John Warner received his BS in Chemistry from UMass Boston and his PhD in Chemistry from Princeton University. After nearly a decade at the Polaroid Corporation, he served as a tenured full professor at UMass Boston and Lowell in Chemistry and Plastics Engineering.</p>
+            <p>While at Polaroid, Warner co-authored the defining text for the field of Green Chemistry with Paul Anastas and codified the 12 Principles of Green Chemistry. He is editor of the journal <em>Green Chemistry Letters and Reviews</em>, and has served as sustainability advisor for several multinational companies. His research in synthetic organic chemistry, noncovalent derivatization, polymer photochemistry, and low-temperature metal oxide semiconductors underpins his theories of "entropic control in materials design."</p>
+            <p>John has received awards across academia (PAESMEM, 2004), industry (Perkin Medal, 2014 — the most prestigious award in applied chemistry), and invention (Lemelson Ambassadorship). In 2011 he was elected a Fellow of the American Chemical Society and named one of "25 Visionaries Changing the World" by Utne Reader. He serves as Distinguished Professor of Green Chemistry at Monash University in Australia.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEADERSHIP -->
+      <div id="tab-about-leadership" class="tab-content">
+        <div style="display:grid; grid-template-columns:200px 1fr; gap:3rem; align-items:start; max-width:860px;">
+          <div>
+            <img src="https://warnerbabcock.vercel.app/wp-content/uploads/2024/11/Joe-Pont-New-230x300.jpg"
+                 alt="Joe Pont"
+                 style="width:100%; border-radius:12px; border:1px solid var(--border);"
+                 onerror="this.style.display='none'">
+          </div>
+          <div>
+            <div class="section-label">Chief Executive Officer</div>
+            <h2 style="font-family:'Playfair Display',serif; font-size:2rem; margin:0.25rem 0 1.25rem;">Joe Pont</h2>
+            <p>Joe Pont was appointed Chief Executive Officer of the Warner Babcock Institute for Green Chemistry on June 1, 2011. Prior to his appointment, Joe served in senior R&D and commercial roles in the chemical and pharmaceutical industries in the US and Europe, including ten years with Lonza — where he served as Head of Research & Development (2008–2009) and Vice President of Marketing & Key Account Management (2010–2011).</p>
+            <p>He has extensive experience leading diverse, global organizations and a substantial track record in sales and marketing. Joe holds a BS in Chemistry from Yale University and a PhD in Organic Chemistry from Princeton University.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div><!-- /about -->
+<div id="page-contact" class="page">
+
+  <div class="page-hero">
+    <div class="page-hero-inner" style="position:relative;">
+      <div class="breadcrumb" onclick="showPage('home')">← Home</div>
+      <h1>Contact</h1>
+      <p>Reach out to the Warner Babcock Institute for Green Chemistry.</p>
+    </div>
+  </div>
+
+  <section class="content-section">
+    <div class="content-inner wide">
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Get in Touch</h3>
+
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div class="contact-item-text">
+              <strong>Address</strong>
+              <span>116 John Street, Suite 130<br>Lowell, MA 01852</span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-item-text">
+              <strong>Phone</strong>
+              <span><a href="tel:+19782295400">+1 (978) 229-5400</a></span>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span><a href="/cdn-cgi/l/email-protection#5a33343c351a2d3b28343f28383b383935393174393537"><span class="__cf_email__" data-cfemail="244d4a424b645345564a4156464546474b474f0a474b49">[email&#160;protected]</span></a></span>
+            </div>
+          </div>
+
+          <div style="margin-top:2rem; padding:1.5rem; background:var(--offwhite); border-radius:12px; border:1px solid var(--border);">
+            <p style="font-size:0.875rem; color:var(--text-mid); margin:0; line-height:1.7;">
+              <strong style="color:var(--text);">Warner Babcock Institute for Green Chemistry, LLC</strong><br>
+              A subsidiary of Cthulhu Ventures
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="contact-map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2940.7!2d-71.3162!3d42.6459!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89e3a0e0e0e0e0e0%3A0x0!2s116+John+St%2C+Lowell%2C+MA+01852!5e0!3m2!1sen!2sus!4v1"
+              width="100%" height="280"
+              style="border:0; border-radius:16px;"
+              allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /contact -->
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/mnt/user-data/uploads/wb_logo_final_transparent.png" alt="Warner Babcock Institute">
+      <p>A uniquely talented team of green chemistry professionals dedicated to sustainable technology solutions across all industries touched by chemistry.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Green Chemistry</h4>
+      <a onclick="showPage('green','about')">About</a>
+      <a onclick="showPage('green','history')">History</a>
+      <a onclick="showPage('green','principles')">The 12 Principles</a>
+    </div>
+    <div class="footer-col">
+      <h4>Our Work</h4>
+      <a onclick="showPage('work','sectors')">Industry Sectors</a>
+      <a onclick="showPage('work','technologies')">Core Technologies</a>
+      <a onclick="showPage('work','inventions')">Inventions</a>
+      <a onclick="showPage('work','patents')">Patents</a>
+    </div>
+    <div class="footer-col">
+      <h4>About Us</h4>
+      <a onclick="showPage('about','founders')">Founders</a>
+      <a onclick="showPage('about','leadership')">Leadership</a>
+      <a onclick="showPage('contact')">Contact</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&#169;2025 Warner Babcock Institute for Green Chemistry, LLC. A subsidiary of Cthulhu Ventures. 116 John Street, Suite 130, Lowell, MA 01852</span>
+    <span><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms &amp; Conditions</a></span>
+  </div>
+</footer>
+
+<script>
+  var navEl = document.querySelector('nav');
+  function updateNav(pageId) {
+    if (pageId === 'home') {
+      navEl.style.background = 'transparent';
+      navEl.style.borderBottom = 'none';
+      navEl.style.position = 'absolute';
+      navEl.classList.remove('nav-dark');
+    } else {
+      navEl.style.background = 'rgba(255,255,255,0.97)';
+      navEl.style.borderBottom = '1px solid #DDE8EC';
+      navEl.style.position = 'sticky';
+      navEl.style.top = '0';
+      navEl.classList.add('nav-dark');
+    }
+  }
+
+  function showPage(pageId, tabId) {
+    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+    var page = document.getElementById('page-' + pageId);
+    if (page) page.classList.add('active');
+    updateNav(pageId);
+    document.querySelectorAll('.nav-links > li > a, .nav-links > li > span').forEach(function(el) { el.classList.remove('active'); });
+    var navEl2 = document.getElementById('nav-' + pageId);
+    if (navEl2) navEl2.classList.add('active');
+    if (tabId) {
+      showTab(pageId, tabId);
+    } else {
+      var firstTab = page && page.querySelector('.tab');
+      if (firstTab) {
+        var m = firstTab.getAttribute('onclick').match(/'([^']+)'/g);
+        if (m && m[1]) showTab(pageId, m[1].replace(/'/g, ''));
+      }
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function showTab(pageId, tabId) {
+    var page = document.getElementById('page-' + pageId);
+    if (!page) return;
+    page.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+    page.querySelectorAll('.tab-content').forEach(function(tc) { tc.classList.remove('active'); });
+    page.querySelectorAll('.tab').forEach(function(t) {
+      if (t.getAttribute('onclick') && t.getAttribute('onclick').indexOf("'" + tabId + "'") !== -1) {
+        t.classList.add('active');
+      }
+    });
+    var el = document.getElementById('tab-' + pageId + '-' + tabId);
+    if (el) el.classList.add('active');
+  }
+
+  showPage('home');
+  updateNav('home');
+</script>
+</body>
+</html>
