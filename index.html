@@ -27,9 +27,9 @@
   .page { display:none; }
   .page.active { display:block; }
   nav { position:sticky; top:0; z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); }
-  .nav-inner { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:72px; }
+  .nav-inner { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; justify-content:space-between; height:80px; }
   .nav-logo { display:flex; align-items:center; cursor:pointer; flex-shrink:0; }
-  .nav-logo img { height:38px; width:auto; }
+  .nav-logo img { height:52px; width:auto; }
   .nav-links { display:flex; align-items:center; gap:0.25rem; list-style:none; }
   .nav-links > li { position:relative; }
   .nav-links > li > a, .nav-links > li > span { display:block; padding:0.5rem 1rem; color:var(--text-mid); text-decoration:none; font-size:0.9rem; font-weight:500; border-radius:6px; cursor:pointer; transition:color var(--transition),background var(--transition); white-space:nowrap; }
@@ -114,6 +114,8 @@
   .hx-hero-overlay { position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,30,40,0.45) 0%, rgba(0,30,40,0.65) 50%, rgba(0,30,40,0.8) 100%); }
   .hx-hero-content { position:relative; z-index:1; height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:2rem; width:100%; }
   .hx-hero-top { position:absolute; top:2rem; left:2rem; right:2rem; display:flex; justify-content:space-between; align-items:flex-start; }
+  .hx-hero-top-left { display:flex; flex-direction:column; gap:0.5rem; }
+  .hx-hero-logo { height:48px; width:auto; mix-blend-mode:screen; }
   .hx-hero-tagline { font-size:0.72rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.5); }
   .hx-hero-main { display:flex; flex-direction:column; align-items:center; max-width:860px; width:100%; }
   .hx-hero-h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,5.5vw,4.8rem); color:var(--white); line-height:1.08; letter-spacing:-0.02em; margin-bottom:1.75rem; }
@@ -272,7 +274,10 @@
     <div class="hx-hero-overlay"></div>
     <div class="hx-hero-content">
       <div class="hx-hero-top">
-        <div class="hx-hero-tagline">Est. 2007 &nbsp;·&nbsp; Lowell, Massachusetts</div>
+        <div class="hx-hero-top-left">
+          <img src="wb_logo_final_transparent.png" alt="Warner Babcock Institute" class="hx-hero-logo">
+          <div class="hx-hero-tagline">Est. 2007 &nbsp;·&nbsp; Lowell, Massachusetts</div>
+        </div>
       </div>
       <div class="hx-hero-main">
         <h1 class="hx-hero-h1">Warner Babcock Institute<br>for Green Chemistry</h1>
@@ -981,7 +986,12 @@
 <script>
   var navEl = document.querySelector('nav');
   function updateNav(pageId) {
-    // nav is always white/sticky now, nothing to change
+    var logoEl = navEl.querySelector('.nav-logo');
+    if (pageId === 'home') {
+      if (logoEl) logoEl.style.visibility = 'hidden';
+    } else {
+      if (logoEl) logoEl.style.visibility = 'visible';
+    }
   }
 
   function showPage(pageId, tabId) {
